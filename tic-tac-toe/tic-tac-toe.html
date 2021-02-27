@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src='tic-tac-toe.js'></script>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tic-tac-toe.css">
+  <title>Tic Tac Toe</title>
+</head>
+<body>
+  <div id='container'>
+    <div class='overlay active'></div>
+    <form class='playerName-form active'>
+      <h1 class='playerName-form__title'>Tic Tac Toe!</h1>
+      <div class='playerName-form__input-box'>
+        <label for='player1-name'>Player 1</label>
+        <input type='text' placeholder='Name' id='player1-name'>
+      </div>
+      <div class='playerName-form__input-box'4---4444444>
+        <label for='player2-name'>Player 2</label>
+        <input type='text' placeholder='Name' id='player2-name'>
+      </div>
+      <button type='submit' class='playerName-form__btn'>Play Game</button>
+    </form>
+    <h1 class='title'>Tic Tac Toe</h1>
+    <div class='gameBoard'>
+    </div>
+    <div class="gameBoard-overlay"></div>
+    <div class='players'>
+    </div>
+    <div class='result'>
+      <p class='result__winner'>Player 1 Won!</p>
+      <button class='result__restart'>Restart!</button>
+    </div>
+  </div>
+</body>
+</html>
