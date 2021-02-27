@@ -1,0 +1,173 @@
+/* reset */
+body {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+div,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
+#container {
+  width: 90vw;
+  max-width: 1400px;
+  margin: 50px auto;
+  position: relative;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.5);
+}
+
+.overlay.active {
+  display: block;
+}
+
+.title {
+  margin: 0 0 50px;
+  font-size: 48px;
+  text-align: center;
+}
+
+.myList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+}
+
+li {
+  padding: 30px 20px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: rgb(226, 226, 226) 3px 3px 15px;
+  display: grid;
+  grid-template-rows: 1fr 40px 40px 50px;
+  position: relative;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+}
+
+.bookImg {
+  display: block;
+  width: 100%;
+}
+
+.bookTitle {
+  padding-top: 15px;
+  font-size: 20px;
+}
+
+.bookAuthor {
+  font-size: 16px;
+}
+
+.bookPages {
+  font-size: 16px;
+  color: gray;
+}
+
+.readBtn {
+  width: 60px;
+  padding: 3px 10px;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+.readBtn.active {
+  background: #065fbf;
+}
+
+.addBtn {
+  font-size: 56px;
+  color: black;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+
+.addForm {
+  display: none;
+  box-sizing: border-box;
+  width: 400px;
+  padding: 80px 30px 50px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: rgb(83, 83, 83) 3px 3px 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+}
+
+.addForm.active {
+  display: block;
+}
+
+.closeBtn {
+  display: block;
+  font-size: 36px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.addForm > input {
+  all: unset;
+  display: block;
+  width: 100%;
+  margin-bottom: 35px;
+  border-bottom: 1px solid black;
+  font-size: 24px;
+}
+
+.addForm > div {
+  margin-bottom: 50px;
+  font-size: 18px;
+}
+
+.submitBtn {
+  padding: 10px 20px;
+  background: black;
+  font-size: 18px;
+  color: white;
+  text-align: center;
+}
