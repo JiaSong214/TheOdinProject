@@ -53,3 +53,24 @@ In this case, function 'capitalizeName' can't be called outside of FactoryFuncti
 ### 3. Module Pattern
 
 Module is very similar with factory function. Difference is that module wrap a factory function in an IIFE. Becuase Module doesn't need to be created a lot.
+
+### 4. Class
+
+It's a new syntax that uses 'class' keywork, but does same thing with Object Constructor and prototype.
+
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayHi() {
+    alert(this.name);
+  }
+}
+
+let jia = new Person("Jia");
+jia.sayHi();
+```
+
+When you call 'new Person', constructor function executed automatically.

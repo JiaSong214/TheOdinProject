@@ -146,8 +146,16 @@ playerNameForm.addEventListener('submit', (e) => {
 
 
 //Player factory
-function Player(name, mark) {
-  return { name, mark };
+// function Player(name, mark) {
+//   return { name, mark };
+// }
+
+//player class
+class Player{
+  constructor(name, mark){
+    this.name = name;
+    this.mark = mark;
+  }
 }
 
 
@@ -155,8 +163,8 @@ function Player(name, mark) {
 const Game = (function() {
 
   const players = [
-    Player('player1', 'O'),
-    Player('player2', 'X')
+    new Player('player1', 'O'),
+    new Player('player2', 'X')
   ]
 
   //default player
