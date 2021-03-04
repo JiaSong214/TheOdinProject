@@ -1,6 +1,6 @@
 # Restaurent Page
 
-[Demo Link](https://jiasong214.github.io/TheOdinProject/restaurant-page/restaurant.html)
+[Demo Link](https://jiasong214.github.io/TheOdinProject/restaurant-page/dist/index.html)
 
 ## What I Learned
 
