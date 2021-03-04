@@ -1,0 +1,123 @@
+body {
+  box-sizing: border-box;
+}
+
+body,
+header,
+main,
+footer,
+h1,
+h2,
+h3,
+p,
+div,
+nav,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+header {
+  width: 100vw;
+  background: white;
+  position: absolute;
+}
+
+nav {
+  width: 90vw;
+  margin: 0 auto;
+  padding: 10px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav > ul {
+  display: flex;
+  justify-content: right;
+}
+
+nav > ul > li {
+  margin-left: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+nav > ul > li.active {
+  font-weight: 900;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 12px;
+  opacity: 0.3;
+}
+
+/* main page */
+.main,
+.menu,
+.contact {
+  height: 100vh;
+  background: #aedaff;
+}
+
+.main > img {
+  display: block;
+  height: 70vh;
+  margin: 0 auto;
+  padding-top: 10vh;
+}
+
+.main > p {
+  width: 60vw;
+  margin: 0 auto;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* menu page */
+.menu > ul {
+  width: 60vw;
+  margin: 0 auto;
+  padding-top: 10vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.menu img {
+  display: block;
+  width: 100%;
+}
+
+/* contact page */
+.contact {
+  padding-top: 30vh;
+}
+
+.contact h2 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.contact p {
+  width: 60vw;
+  margin: 0 auto 50px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.contact li {
+  font-size: 48px;
+  font-weight: 300;
+  text-align: center;
+}
