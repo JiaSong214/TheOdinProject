@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer type="module" src='script/index.js'></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>To-do list</title>
+</head>
+<body>
+  <div id='container'>
+
+    <div class='addForm-overlay'></div>
+    <form class='addForm' method='post'>
+      <h2 class='addForm__title'>Add Task</h2>
+      <input type='text' class='addForm__input' required>
+      <div class='addForm-innerbox'>
+        <button type='submit' class='addForm__btn'>Add Task</button>
+        <ul class='addForm__moreInfo'>
+          <li>
+            <label for='date'>Date</label>
+            <input type='date' id='date' class='addForm__moreInfo__date'>
+          </li>
+          <li>
+            <input type='checkbox' id='priority' name='checkbox[]' class='addForm__moreInfo__priority'>
+            <label for='priority'>Important</label>
+          </li>
+        </ul>
+      </div>
+    </form>
+    
+
+    <header class='header'>
+      <h1 class='header__title'>To-do List</h1>
+      <div class='header__addBtn'>+</div>
+    </header>
+
+    <asice class='project'>
+      <ul class='project__default-list'>
+        <li class='project__default-list__all'>All</li>
+        <li class='project__default-list__today'>Today</li>
+        <li class='project__default-list__planned'>Planned</li>
+        <li class='project__default-list__important'>Important</li>
+      </ul>
+      <ul class='project__personal-list'>
+      </ul>
+      <form class='project__addForm'>
+        <button type='submit' class='project__addForm__btn'>+</button>
+        <input type='text' class='project__addForm__input' placeholder='Add Project' required>
+      </form>
+    </asice>
+
+    <div class='main-container'>
+      <div class='todo'>
+        <h2 class='todo__title'></h2>
+        <ul class='todo__list'>
+        </ul>
+        <div class='todo__list__addBtn'>
+          <span>+</span>Add Task
+        </div>
+      </div>
+      <aside class='info'>
+      </aside>
+    </div>
+
+  </div>
+</body>
+</html>
