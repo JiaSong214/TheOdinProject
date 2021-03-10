@@ -195,17 +195,19 @@ body {
 
 /* project */
 .project {
-  padding: 30px;
   background: #2c2d32;
   grid-area: project;
 }
 
-.project > ul:first-child {
-  border-bottom: 1px solid #eaeaea;
-}
-
-.project__personal-list {
-  margin-top: 20px;
+.project > ul:first-child::after {
+  display: block;
+  content: "";
+  width: 80%;
+  height: 1px;
+  background: #c7c7c7;
+  opacity: 0.2;
+  position: relative;
+  left: 10%;
 }
 
 .project__personal-list > li {
@@ -215,11 +217,14 @@ body {
 }
 
 .project > ul > li {
-  margin-bottom: 20px;
+  padding: 15px 30px;
   font-size: 18px;
   color: #c7c7c7;
   font-weight: 300;
   cursor: pointer;
+}
+.project > ul > li.active {
+  background: #252529;
 }
 
 .project__personal-list__btn {
@@ -233,10 +238,9 @@ body {
 .project__addForm {
   display: flex;
   justify-content: start;
-  margin-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eaeaea;
-  font-size: 16px;
+  padding: 15px 30px;
+  font-size: 14px;
+  opacity: 0.5;
 }
 
 .project__addForm__btn {

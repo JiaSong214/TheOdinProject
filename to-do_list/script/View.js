@@ -6,8 +6,6 @@ const View = (() => {
 
   let checkedObserver = true;
 
-
-
   //create DOM for to-do list
   const renderTodo = (todo) => {
     const listItem = document.createElement('li');
@@ -26,7 +24,7 @@ const View = (() => {
       checked.classList.add('checked');
     }
     checked.addEventListener('click', () => {
-      Controller.changeChecked(todo.id);
+      Controller.changeTodo.changeChecked(todo.id);
     });
 
     const title = document.createElement('h3');
@@ -36,17 +34,13 @@ const View = (() => {
 
     const date = document.createElement('div');
     const currentDate = new Date();
-    const today = currentDate.toISOString();
-
-    //데이트 비교해서 today 넣기
+    const todayDate = currentDate.toISOString().slice(0,10);
 
     if(todo.dueDate !== ''){
       date.classList.add('todo__list__item__date');
-      console.log(todo.dueDate, today)
 
-      if(todo.dueDate === today){
+      if(todo.dueDate === todayDate){
         date.textContent = `Due to Today`;
-
       }else {
         date.textContent = `Due to ${todo.dueDate}`;
       }
@@ -83,17 +77,20 @@ const View = (() => {
     renderToday: (todoObj) => {
       todoList.textContent = '';
       listTitle.textContent = 'Today';
+
+      const currentDate = new Date();
+      const todayDate = currentDate.toISOString().slice(0,10);
     
-      // todoObj.map((todo) => todo.today === true
-      // ? renderTodo(todo) : ''
-      // )
+      todoObj.map((todo) => todo.dueDate === todayDate
+        ? renderTodo(todo) : ''
+      )
     },
     renderPlanned: (todoObj) => {
       todoList.textContent = '';
       listTitle.textContent = 'Planned';
     
       todoObj.map((todo) => todo.dueDate !== ''
-      ? renderTodo(todo) : ''
+        ? renderTodo(todo) : ''
       )
     },
     renderImportant: (todoObj) => {
@@ -101,7 +98,7 @@ const View = (() => {
       listTitle.textContent = 'Important';
     
       todoObj.map((todo) => todo.priority === true
-      ? renderTodo(todo) : ''
+        ? renderTodo(todo) : ''
       )
     },
     renderPersonalProject: (todoObj, project) => {
@@ -138,10 +135,26 @@ const View = (() => {
   }
 
 
+  //project section active effect
+  const activeProjectTitle = (project) => {
+    let targetProject;
+    const projectDefaultList = document.querySelectorAll('.project__default-list > li');
+    projectDefaultList.forEach(projectList => {
+      projectList.classList.remove('active');
+
+      if(projectList.getAttribute('data-id') === project){
+        targetProject = projectList
+      }
+    })
+    targetProject.classList.add('active');
+  }
+
+
   const closeSidebar = () => {
     const todoAddInfo = document.querySelector('.info');
     todoAddInfo.classList.remove('active');
   }
+
 
   //create DOM for side bar
   const renderSidebar = (todo, projectList) => {
@@ -168,7 +181,7 @@ const View = (() => {
     const title = document.createElement('textarea');
     title.classList.add('info__title');
     title.textContent = todo.title;
-    title.addEventListener('change', () => Controller.changeTitle(todo.id, title.value));
+    title.addEventListener('change', () => Controller.changeTodo.changeTitle(todo.id, title.value));
     titleContainer.append(title);
   
     if(todo.description !== ''){
@@ -203,12 +216,12 @@ const View = (() => {
     dateBtnInput.classList.add('info__dateBtn__input');
     dateBtnInput.setAttribute('type', 'date');
     dateBtnInput.setAttribute('value', todo.dueDate);
-    dateBtnInput.addEventListener('change', () => Controller.changeDate(todo.id, dateBtnInput.value))
+    dateBtnInput.addEventListener('change', () => Controller.changeTodo.changeDate(todo.id, dateBtnInput.value))
     dateBtn.append(dateBtnLabel, dateBtnInput);
   
     const priorityBtn = document.createElement('div');
     priorityBtn.classList.add('info__priorityBtn');
-    priorityBtn.addEventListener('click', () => Controller.changePriority(todo.id));
+    priorityBtn.addEventListener('click', () => Controller.changeTodo.changePriority(todo.id));
   
     if(todo.priority === true){
       priorityBtn.textContent = 'Remove from Priority';
@@ -220,7 +233,7 @@ const View = (() => {
     projectBtnBox.classList.add('info__projectBtn-box');
     const projectBtn = document.createElement('select');
     projectBtn.classList.add('info__projectBtn');
-    projectBtn.addEventListener('change', () => Controller.changeProjectCategory(todo.id, projectBtn.value))
+    projectBtn.addEventListener('change', () => Controller.changeTodo.changeProjectCategory(todo.id, projectBtn.value))
     projectBtnBox.append(projectBtn);
 
 
@@ -254,6 +267,7 @@ const View = (() => {
   return {
     todoView,
     renderProject,
+    activeProjectTitle,
     renderSidebar,
     controlTodoForm,
 

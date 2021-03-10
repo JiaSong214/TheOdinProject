@@ -52,71 +52,60 @@ const Controller = (() => {
     Model.projectModel.addData(newProjectTitle);
     projectAddInput.value = "";
   };
+ 
 
-  const changeTitle = (id, title) => {
-    const todoObj = Model.todoModel.getData();
-    const modifiedTodoObj = todoObj.filter((todo) =>
-      todo.id === id ? todo.title = title : todo
-    );
+  //methods for change todo
+  const changeTodo = {
+    todoObj: Model.todoModel.getData(),
 
-    Model.todoModel.changeData(modifiedTodoObj);
-    View.todoView.renderAll(modifiedTodoObj);
-  };
-
-
-  const changeDate = (id, date) => {
-    const todoObj = Model.todoModel.getData();
-    const modifiedTodoObj = todoObj.filter((todo) =>
-      todo.id === id ? todo.date = date : todo
-    );
-
-    Model.todoModel.changeData(modifiedTodoObj);
-    View.todoView.renderAll(modifiedTodoObj);
-  };
-
-
-  //두번 클릭했을때 사라지는 문제 해결하기
-  //새로운 배열 만들때 문제가 있는 듯?
-  const changeChecked = (id) => {
-    const todoObj = Model.todoModel.getData();
-    const modifiedTodoObj = todoObj.filter((todo) =>
-      todo.id === id ? todo.checked = !todo.checked : todo
-    );
-
-    console.log(todoObj)
-
-    Model.todoModel.changeData(modifiedTodoObj);
-    View.todoView.renderAll(modifiedTodoObj);
-  };
-
-
-  const changePriority = (id) => {
-    const todoObj = Model.todoModel.getData();
-    const modifiedTodoObj = todoObj.filter((todo) =>
-      todo.id === id ? todo.priority = !todo.priority : todo
-    );
-
-    console.log(id);
-    console.log(modifiedTodoObj);
-
-    Model.todoModel.changeData(modifiedTodoObj);
-    View.todoView.renderAll(modifiedTodoObj);
-  };
-
-
-  const changeProjectCategory = (id, project) => {
-    const todoObj = Model.todoModel.getData();
-    const modifiedTodoObj = todoObj.filter((todo) =>
-      todo.id === id ? todo.project = project : todo
-    );
+    changeTitle: function (id, title) {
+      const modifiedTodoObj = this.todoObj.filter((todo) =>
+        todo.id === id ? todo.title = title : todo
+      );
+  
+      Model.todoModel.changeData(modifiedTodoObj);
+      renderCurrentProject(currentProject);
+    },
+    changeDate: function (id, date) {
+      const modifiedTodoObj = this.todoObj.filter((todo) =>
+        todo.id === id ? todo.date = date : todo
+      );
+  
+      Model.todoModel.changeData(modifiedTodoObj);
+      renderCurrentProject(currentProject);
+    },
+    changeChecked: function (id) {
+      const modifiedTodoObj = this.todoObj.filter((todo) =>
+        todo.id === id ? todo.checked = !todo.checked : todo
+      );
+  
+      console.log(this.todoObj)
+  
+      Model.todoModel.changeData(modifiedTodoObj);
+      renderCurrentProject(currentProject);
+    },
+    changePriority: function (id) {
+      const modifiedTodoObj = this.todoObj.filter((todo) =>
+        todo.id === id ? todo.priority = !todo.priority : todo
+      );
+  
+      console.log(id);
+      console.log(modifiedTodoObj);
+  
+      Model.todoModel.changeData(modifiedTodoObj);
+      renderCurrentProject(currentProject);
+    },
+    changeProjectCategory: function (id, project) {
+      const modifiedTodoObj = this.todoObj.filter((todo) =>
+        todo.id === id ? todo.project = project : todo
+      );
+    },
+    deleteTodo: function (id) {
+      Model.todoModel.deleteData(id);
+      renderCurrentProject(currentProject);
+    }
   }
 
-
-  const deleteTodo = (id) => {
-    Model.todoModel.deleteData(id);
-
-    View.todoView.renderAll(Model.todoModel.getData());
-  }
 
   const deleteProject = (id) => {
     Model.projectModel.deleteData(id);
@@ -139,30 +128,42 @@ const Controller = (() => {
     View.renderSidebar(todo, projectList);
   }
 
+  let currentProject = 'All';
   const projectDefaultList = document.querySelectorAll('.project__default-list > li');
 
-  projectDefaultList.forEach(projectList => {
-    projectList.addEventListener('click', function () {
-      const todoObj = Model.todoModel.getData();
+  const renderCurrentProject = (project) => {
+    const todoObj = Model.todoModel.getData();
+    
+    switch(project){
+      case 'All':
+        View.todoView.renderAll(todoObj);
+        currentProject = 'All';
+        break;
+      case 'Today':
+        View.todoView.renderToday(todoObj);
+        currentProject = 'Today';
+        break;
+      case 'Planned':
+        View.todoView.renderPlanned(todoObj);
+        currentProject = 'Planned';
+        break;
+      case 'Important':
+        View.todoView.renderImportant(todoObj);
+        currentProject = 'Important';
+        break;
+    }
 
-      switch(this.textContent){
-        case 'All':
-          View.todoView.renderAll(todoObj);
-          break;
-        case 'Today':
-          View.todoView.renderToday(todoObj);
-          break;
-        case 'Planned':
-          View.todoView.renderPlanned(todoObj);
-          break;
-        case 'Important':
-          View.todoView.renderImportant(todoObj);
-          break;
-      }
-    })
-  })
+    View.activeProjectTitle(project);
+  }
+
 
   //all event listeners
+  projectDefaultList.forEach(projectList => {
+    projectList.addEventListener('click', function () {
+      renderCurrentProject(this.textContent);
+    });
+  })
+
   addForm.addEventListener("submit", (e) => {
     //get all values and send to Model.js
     submitTodoForm(e);
@@ -188,12 +189,7 @@ const Controller = (() => {
 
   return {
     renderFirstPage,
-    changeTitle,
-    changeDate,
-    changeChecked,
-    changePriority,
-    changeProjectCategory,
-    deleteTodo,
+    changeTodo,
     openSidebar,
     deleteProject
   };
