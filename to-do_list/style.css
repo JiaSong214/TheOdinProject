@@ -404,6 +404,8 @@ body {
 /* info */
 .info {
   width: 0px;
+  height: calc(90vh - 40px);
+  overflow-y: scroll;
   background: #fafafa;
   box-shadow: #eaeaea -5px 0px 20px;
   position: relative;

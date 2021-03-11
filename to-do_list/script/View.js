@@ -52,7 +52,7 @@ const View = (() => {
     const title = document.createElement('h3');
     title.classList.add('todo__list__item__title');
     title.textContent = todo.title;
-    title.addEventListener('click', () => Controller.openSidebar(todo));
+    title.addEventListener('click', () => Controller.openSidebar(todo.id));
 
     //due date
     const date = document.createElement('div');
@@ -184,7 +184,8 @@ const View = (() => {
             if(desc === this.parentNode) deleteItemIndex = index;
           })
 
-          Controller.todo.deleteDescription(todo.id, deleteItemIndex)
+          Controller.todo.deleteDescription(todo.id, deleteItemIndex);
+          // renderSidebar(todo, projectList);
         })
   
         desc.append(deleteBtn);
@@ -207,6 +208,7 @@ const View = (() => {
 
       const inputValue = descInput.value;
       Controller.todo.addDescription(todo.id, inputValue);
+      // renderSidebar(todo, projectList) 
     })
   
     //due date button

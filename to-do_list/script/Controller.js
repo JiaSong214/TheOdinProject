@@ -19,6 +19,7 @@ const Controller = (() => {
 
   //default project
   let currentProject = 'All';
+  let formerProject = currentProject;
  
 
   //methods for manipulate to-do
@@ -54,6 +55,7 @@ const Controller = (() => {
   
       Model.todoModel.changeData(modifiedTodoObj);
       renderCurrentProject(currentProject);
+      openSidebar(id);
     },
     deleteDescription: function (id, index) {
       const todoObj = Model.todoModel.getData();
@@ -66,6 +68,7 @@ const Controller = (() => {
   
       Model.todoModel.changeData(modifiedTodoObj);
       renderCurrentProject(currentProject);
+      openSidebar(id);
     },
     changeTitle: function (id, title) {
       const todoObj = Model.todoModel.getData();
@@ -102,6 +105,7 @@ const Controller = (() => {
   
       Model.todoModel.changeData(modifiedTodoObj);
       renderCurrentProject(currentProject);
+      openSidebar(id);
     },
     changeProjectCategory: function (id, project) {
       const todoObj = Model.todoModel.getData();
@@ -132,18 +136,20 @@ const Controller = (() => {
   }
 
   
-  const openSidebar = (todo) => {
+  const openSidebar = (id) => {
+    const todo = Model.todoModel.getData().filter(todo => todo.id === id);
     const projectList = Model.projectModel.getData();
-    View.renderSidebar(todo, projectList);
+    View.renderSidebar(todo[0], projectList);
   }
 
 
   const renderCurrentProject = (project) => {
-    const todoObj = Model.todoModel.getData();
     View.clearTodo(project);
+
+    formerProject = currentProject;
     currentProject = project;
 
-    console.log(todoObj)
+    const todoObj = Model.todoModel.getData();
 
     switch(project){
       case 'All':
@@ -178,7 +184,7 @@ const Controller = (() => {
         break;
     }
     View.activeProjectTitle(project);
-    View.closeSidebar();
+    if(currentProject !== formerProject) View.closeSidebar();
   }
 
 
