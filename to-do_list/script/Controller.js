@@ -8,97 +8,109 @@ const Controller = (() => {
   const addForm = document.querySelector(".addForm");
   const projectAddForm = document.querySelector(".project__addForm");
   const addFormOverlay = document.querySelector('.addForm-overlay');
+  const projectDefaultList = document.querySelectorAll('.project__default-list > li');
 
 
-  //set the calender for today
+  //set the input calender for today
   const date = new Date();
   const defaultDate = document.querySelector('input[type="date"]');
   defaultDate.value = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 
 
-  //To-do form submit event
-  const submitTodoForm = (e) => {
-    e.preventDefault();
-
-    //take values from form
-    const addFormTitle = document.querySelector(".addForm__input");
-    const addFormDate = document.querySelector(".addForm__moreInfo__date");
-    const addFormPriority = document.querySelector(
-      ".addForm__moreInfo__priority"
-    );
-
-    const newTodo = [
-      addFormTitle.value,
-      [],
-      addFormDate.value,
-      addFormPriority.checked,
-      false,
-      "",
-    ];
-
-    Model.todoModel.addData(newTodo);
-
-    //clean ther form after submit
-    addFormTitle.value = "";
-    addFormPriority.checked = false;
-  };
-
-
-  //project name form submit event
-  const submitProjectForm = (e) => {
-    e.preventDefault();
-    const projectAddInput = document.querySelector(".project__addForm__input");
-    const newProjectTitle = projectAddInput.value;
-    Model.projectModel.addData(newProjectTitle);
-    projectAddInput.value = "";
-  };
+  //default project
+  let currentProject = 'All';
  
 
-  //methods for change todo
-  const changeTodo = {
-    todoObj: Model.todoModel.getData(),
+  //methods for manipulate to-do
+  const todo = {
+    addTodo: function (e) {
+      //take values from form
+      const addFormTitle = document.querySelector(".addForm__input");
+      const addFormDate = document.querySelector(".addForm__moreInfo__date");
+      const addFormPriority = document.querySelector(
+        ".addForm__moreInfo__priority"
+      );
+  
+      const newTodo = [
+        addFormTitle.value,
+        [],
+        addFormDate.value,
+        addFormPriority.checked,
+        false,
+        currentProject,
+      ];
+  
+      Model.todoModel.addData(newTodo);
+  
+      //clean ther form after submit
+      addFormTitle.value = "";
+      addFormPriority.checked = false;
+    },
+    addDescription: function (id, desc) {
+      const todoObj = Model.todoModel.getData();
+      const modifiedTodoObj = todoObj.map(todo =>
+        todo.id === id ? {...todo, description: [...todo.description, desc]} : todo
+      );
+  
+      Model.todoModel.changeData(modifiedTodoObj);
+      renderCurrentProject(currentProject);
+    },
+    deleteDescription: function (id, index) {
+      const todoObj = Model.todoModel.getData();
+      const selectedTodo = todoObj.filter(todo => todo.id == id);
+      selectedTodo[0].description.splice(index,1);
 
+      const modifiedTodoObj = todoObj.map(todo =>
+        todo.id === id ? {...todo, description: selectedTodo[0].description} : todo
+      );
+  
+      Model.todoModel.changeData(modifiedTodoObj);
+      renderCurrentProject(currentProject);
+    },
     changeTitle: function (id, title) {
-      const modifiedTodoObj = this.todoObj.filter((todo) =>
-        todo.id === id ? todo.title = title : todo
+      const todoObj = Model.todoModel.getData();
+      const modifiedTodoObj = todoObj.map(todo =>
+        todo.id === id ? {...todo, title: title} : todo
       );
   
       Model.todoModel.changeData(modifiedTodoObj);
       renderCurrentProject(currentProject);
     },
     changeDate: function (id, date) {
-      const modifiedTodoObj = this.todoObj.filter((todo) =>
-        todo.id === id ? todo.date = date : todo
+      const todoObj = Model.todoModel.getData();
+      const modifiedTodoObj = todoObj.map(todo =>
+        todo.id === id ? {...todo, dueDate: date} : todo
       );
-  
+
       Model.todoModel.changeData(modifiedTodoObj);
       renderCurrentProject(currentProject);
     },
     changeChecked: function (id) {
-      const modifiedTodoObj = this.todoObj.filter((todo) =>
-        todo.id === id ? todo.checked = !todo.checked : todo
+      const todoObj = Model.todoModel.getData();
+      const modifiedTodoObj = todoObj.map(todo => 
+        todo.id === id ? { ...todo, checked: !todo.checked} : todo
       );
-  
-      console.log(this.todoObj)
-  
+
       Model.todoModel.changeData(modifiedTodoObj);
       renderCurrentProject(currentProject);
     },
     changePriority: function (id) {
-      const modifiedTodoObj = this.todoObj.filter((todo) =>
-        todo.id === id ? todo.priority = !todo.priority : todo
+      const todoObj = Model.todoModel.getData();
+      const modifiedTodoObj = todoObj.map(todo =>
+        todo.id === id ? {...todo, priority: !todo.priority} : todo
       );
-  
-      console.log(id);
-      console.log(modifiedTodoObj);
   
       Model.todoModel.changeData(modifiedTodoObj);
       renderCurrentProject(currentProject);
     },
     changeProjectCategory: function (id, project) {
-      const modifiedTodoObj = this.todoObj.filter((todo) =>
-        todo.id === id ? todo.project = project : todo
+      const todoObj = Model.todoModel.getData();
+      const modifiedTodoObj = todoObj.map(todo =>
+        todo.id === id ? {...todo, project: project} : todo
       );
+
+      Model.todoModel.changeData(modifiedTodoObj);
+      renderCurrentProject(currentProject);
     },
     deleteTodo: function (id) {
       Model.todoModel.deleteData(id);
@@ -106,21 +118,18 @@ const Controller = (() => {
     }
   }
 
-
-  const deleteProject = (id) => {
-    Model.projectModel.deleteData(id);
-
-    View.renderProject(Model.projectModel.getData());
+  //methods for manipulate project
+  const project = {
+    addProject: (e) => {
+      const projectAddInput = document.querySelector(".project__addForm__input");
+      Model.projectModel.addData(projectAddInput.value);
+      projectAddInput.value = "";
+    },
+    deleteProject: (id) => {
+      Model.projectModel.deleteData(id);
+      View.renderProject(Model.projectModel.getData());
+    }
   }
-
-
-  const renderFirstPage = () => {
-    const todoObj = Model.todoModel.getData();
-    View.todoView.renderAll(todoObj);
-
-    const projectObj = Model.projectModel.getData();
-    View.renderProject(projectObj);
-  };
 
   
   const openSidebar = (todo) => {
@@ -128,56 +137,83 @@ const Controller = (() => {
     View.renderSidebar(todo, projectList);
   }
 
-  let currentProject = 'All';
-  const projectDefaultList = document.querySelectorAll('.project__default-list > li');
 
   const renderCurrentProject = (project) => {
     const todoObj = Model.todoModel.getData();
-    
+    View.clearTodo(project);
+    currentProject = project;
+
+    console.log(todoObj)
+
     switch(project){
       case 'All':
-        View.todoView.renderAll(todoObj);
-        currentProject = 'All';
+        todoObj.map(todo => View.renderTodo(todo));
         break;
+
       case 'Today':
-        View.todoView.renderToday(todoObj);
-        currentProject = 'Today';
+        const currentDate = new Date();
+        const todayDate = currentDate.toISOString().slice(0,10);
+      
+        todoObj.map((todo) => todo.dueDate === todayDate
+          ? View.renderTodo(todo) : ''
+        )
         break;
+
       case 'Planned':
-        View.todoView.renderPlanned(todoObj);
-        currentProject = 'Planned';
+        todoObj.map((todo) => todo.dueDate !== ''
+          ? View.renderTodo(todo) : ''
+        )
         break;
+
       case 'Important':
-        View.todoView.renderImportant(todoObj);
-        currentProject = 'Important';
+        todoObj.map((todo) => todo.priority === true
+        ? View.renderTodo(todo) : ''
+        )
+        break;
+
+      default:
+        todoObj.map((todo) => todo.project === project
+          ? View.renderTodo(todo) : ''
+        )
         break;
     }
-
     View.activeProjectTitle(project);
+    View.closeSidebar();
   }
 
 
+  const renderFirstPage = () => {
+    const todoObj = Model.todoModel.getData();
+    View.clearTodo('All');
+    todoObj.map(todo => View.renderTodo(todo));
+
+    const projectObj = Model.projectModel.getData();
+    View.renderProject(projectObj);
+  };
+
+
   //all event listeners
+  //default project list event listener
   projectDefaultList.forEach(projectList => {
     projectList.addEventListener('click', function () {
-      renderCurrentProject(this.textContent);
+      renderCurrentProject(this.getAttribute('data-id'));
     });
   })
 
   addForm.addEventListener("submit", (e) => {
+    e.preventDefault();
     //get all values and send to Model.js
-    submitTodoForm(e);
+    todo.addTodo(e);
     //close the form
     View.controlTodoForm.closeForm();
-    //clear the list
-    //get a new data from Model and render
-    const todoObj = Model.todoModel.getData();
-    View.todoView.renderAll(todoObj);
+    //render new todo list in current project
+    renderCurrentProject(currentProject);
   });
 
   projectAddForm.addEventListener("submit", (e) => {
+    e.preventDefault();
     //get a project name and send to Modal.js
-    submitProjectForm(e);
+    project.addProject(e);
     //get a new data from Model and render
     const projectObj = Model.projectModel.getData();
     View.renderProject(projectObj);
@@ -187,11 +223,13 @@ const Controller = (() => {
   headerAddBtn.addEventListener("click", View.controlTodoForm.openForm);
   addFormOverlay.addEventListener('click', View.controlTodoForm.closeForm);
 
+
   return {
     renderFirstPage,
-    changeTodo,
+    todo,
+    project,
     openSidebar,
-    deleteProject
+    renderCurrentProject
   };
 })();
 

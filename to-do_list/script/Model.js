@@ -1,7 +1,8 @@
 // ((exports) => {
   const Model = (() => {
-    function ToDo (title, description, dueDate, today, priority, checked, project) {
-      this.id = todoModel.getData().length,
+
+    function ToDo (title, description, dueDate, priority, checked, project) {
+      this.id = `${todoModel.getData().length}+${new Date().getTime()}`,
       this.title = title,
       this.description = description,
       this.dueDate = dueDate,
@@ -11,7 +12,7 @@
     }
     
     function Project (title) {
-      this.id = projectModel.getData.length,
+      this.id = `${projectModel.getData().length}+${new Date().getTime()}`,
       this.title = title
     }
 
@@ -21,9 +22,10 @@
           id: 0,
           title: 'Make a To Do List',
           description: ['Create CRUD', 'Connect to Memory'],
-          dueDate: '2020-09-29',
+          dueDate: '2021-03-11',
           priority: true,
-          checked: false
+          checked: false,
+          project: 'Study'
         },
         {
           id: 1,
@@ -31,15 +33,26 @@
           description: '',
           dueDate: '',
           priority: false,
-          checked: true
+          checked: true,
+          project: ''
         },
         {
           id: 2,
-          title: 'Check new properties',
+          title: 'Grocery shopping for dinner',
+          description: ['Eggplant', 'Tomato', 'Egg'],
+          dueDate: '',
+          priority: false,
+          checked: false,
+          project: 'Shopping'
+        },
+        {
+          id: 3,
+          title: 'Study Odin Project',
           description: '',
           dueDate: '',
           priority: false,
-          checked: false
+          checked: false,
+          project: 'Study'
         }
       ],
       getData: () => {
@@ -61,11 +74,11 @@
     const projectModel = {
       projectObj: [
         {
-          id: 1,
+          id: 0,
           title: 'Study'
         },
         {
-          id: 2,
+          id: 1,
           title: 'Shopping'
         }
       ],
