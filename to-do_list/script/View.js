@@ -98,7 +98,7 @@ const View = (() => {
       //project title
       const projectListItem = document.createElement('li');
       projectListItem.textContent = project.title;
-      projectListItem.classList.add(`project__personal-list__${project.title}`)
+      projectListItem.classList.add(`project__personal-list__`)
       projectListItem.setAttribute('data-id', project.title);
       projectListItem.addEventListener('click', () => {
         Controller.renderCurrentProject(project.title);
@@ -129,8 +129,8 @@ const View = (() => {
         targetProject = projectList
       }
     })
-    //add 'active' class to selected project
-    targetProject.classList.add('active');
+    //if targetProject is not deleted, add 'active' class to selected project
+    if(targetProject) targetProject.classList.add('active');
   }
 
 
