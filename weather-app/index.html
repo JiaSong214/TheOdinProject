@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+
+  <script defer src='script.js'></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Weather App</title>
+</head>
+<body>
+  <div id="container">
+    <p class='errMsg'>Sorry, Couldn't find a forecast :(</p>
+    <form action="submit" class="searchForm">
+      <input type="text" placeholder="Search Your City">
+      <button type="submit">&#8599;</button>
+    </form>
+    <div class="forecast">
+      <div class="cityBox">
+        <h1 class='cityName'></h1>
+        <div class="weather">
+          <img class='weatherIcon' src="" alt="">
+          <div class='tempBox'>
+            <p class="temperature"></p>
+            <span class="tempSymbol">&#176;</span>
+          </div>
+        </div>
+        <p class="summary">Sunny</p>
+      </div>
+      <div class="hourly chart">
+        <h3>Hourly</h3>
+        <ul></ul>
+      </div>
+      <div class="daily chart">
+        <h3>Daily</h3>
+        <ul></ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
