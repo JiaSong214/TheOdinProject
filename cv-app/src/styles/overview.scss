@@ -1,0 +1,87 @@
+@import "./global.scss";
+
+.CV-overview {
+  width: 60vw;
+  height: calc(60vw * 1.414);
+  margin: 2vw 5vw;
+  box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.1);
+}
+
+.titleBox {
+  width: 100%;
+  padding: 30px;
+  background: #353a45;
+  color: white;
+
+  .name {
+    font-size: 2.75rem;
+    font-weight: 300;
+
+    .last-name {
+      font-weight: 400;
+    }
+  }
+
+  .title {
+    margin-bottom: 30px;
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+
+  .e-mail,
+  .number {
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.5;
+
+    span {
+      font-weight: 400;
+    }
+  }
+}
+
+.mainBox {
+  padding: 30px;
+
+  .summary {
+    font-size: 1rem;
+  }
+
+  > div {
+    margin-top: 30px;
+
+    h1 {
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 1.75rem;
+      font-weight: 500;
+    }
+
+    li {
+      display: grid;
+      grid-template-columns: 4fr 6fr;
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 400;
+      }
+
+      h3 {
+        padding: 5px 0;
+        font-size: 1.125rem;
+        font-weight: 300;
+        font-style: italic;
+      }
+
+      // ul {
+      //   list-style: square !important;
+      // }
+
+      ul > li {
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}
