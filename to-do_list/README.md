@@ -1,6 +1,6 @@
 # to-do list
 
-[Demo Link](https://jiasong214.github.io/TheOdinProject/to-do_list/index.html)
+[Demo Link](https://jiasong214.github.io/the-odin-project/to-do_list/index.html)
 
 ## What I Learned
 

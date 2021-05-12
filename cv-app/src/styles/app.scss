@@ -1,17 +1,16 @@
 .form {
   width: 500px;
   padding: 10px 30px;
-  background: rgb(161, 161, 161);
+  background: white;
   box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 20px;
+  top: 0;
   right: 0;
 
   h1 {
     margin-bottom: 30px;
     font-size: 1rem;
     font-weight: 300;
-    color: white;
   }
 
   input {
@@ -20,12 +19,10 @@
     width: 300px;
     margin: 30px;
     padding: 5px 0;
-    border-bottom: 1px solid white;
-    color: white;
+    border-bottom: 1px solid black;
 
     &::placeholder {
       font-size: 1rem;
-      color: rgba(255, 255, 255, 0.5);
     }
   }
 }

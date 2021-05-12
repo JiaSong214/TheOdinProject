@@ -17,6 +17,7 @@ function App() {
           <input placeholder='Job Title'></input>
           <input placeholder='E-mail'></input>
           <input placeholder='Phone'></input>
+          
           <button type='submit'>Enter</button>
         </form>
       </div>

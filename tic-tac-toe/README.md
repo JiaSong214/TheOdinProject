@@ -1,6 +1,6 @@
 # Tic Tac Toe Game
 
-[Demo Link](https://jiasong214.github.io/TheOdinProject/tic-tac-toe/tic-tac-toe.html)
+[Demo Link](https://jiasong214.github.io/the-odin-project/tic-tac-toe/tic-tac-toe.html)
 
 ## What I Learned
 

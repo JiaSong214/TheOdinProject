@@ -1,6 +1,6 @@
 # weather app
 
-[Demo Link](https://jiasong214.github.io/TheOdinProject/weather-app/index.html)
+[Demo Link](https://jiasong214.github.io/the-odin-project/weather-app/index.html)
 
 ## What I Learned
 

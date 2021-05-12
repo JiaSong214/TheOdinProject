@@ -1,6 +1,6 @@
 # Library
 
-[Demo Link](https://jiasong214.github.io/TheOdinProject/library/library.html)
+[Demo Link](https://jiasong214.github.io/the-odin-project/library/library.html)
 
 ## What I Learned
 
